@@ -11,10 +11,7 @@ export const crawlPararius = ($: any) => {
 
     var properties : PropertyResultModel[] = new Array();    
 
-    var pLinks: string[] = new Array();   
     var pAddrs: string[] = new Array();
-    var pCodes: string[] = new Array();
-    var pPrices: string[] = new Array();
     var pRooms: string[] = new Array();
     var pSizes: string[] = new Array();
     
@@ -25,50 +22,51 @@ export const crawlPararius = ($: any) => {
 
     for(var i = 0; i < numListingsOnPage; i++){
 
+        var currNode = listingNodes[i];
+
         //imgs
-        var imgNodes = $(listingNodes[i]).find('.centered-image-container img');
+        var imgNodes = $(currNode).find('.centered-image-container img');
         var pImgs: string[] = new Array();
         imgNodes.each((c: any, n: any) => {
             pImgs.push($(n).attr('src') || $(n).attr('data-src'));
         })
 
-        //link
-        var pLink = `${process.env.PARARIUS_BASE_URL}${$(listingNodes[i]).find('.details h2 a').attr('href')}`
-
-        //addr
-        var pCode = $(listingNodes[i]).find('.details .breadcrumbs li:first-child').text().trim();
-
+        var pLink = `${process.env.PARARIUS_BASE_URL}${$(currNode).find('.details h2 a').attr('href')}`
+        var pCode = $(currNode).find('.details .breadcrumbs li:first-child').text().trim();
+        var pPrice = $(currNode).find('.details .price').text().replace(/\s/g,'').split("/")[0];
+        var pAddr = $(currNode).find('.details h2 a').text().replace(/House|Apartment/gi, '').replace(/  +/g, ' ').replace(/(\r\n\t|\n|\r\t)/gm,"").trim();
+        var pSize = $(currNode).find();
     };
     
 
 
-    pLinks = findPropertyLinks($);
-    pImgs = findPropertyImages($);
-    pPrices = findPriceInfo($);
-    var vals = findAddressInfos($);
-    pAddrs = vals.first;
-    pCodes = vals.second;
-    vals = findRoomsAndSizeInfo($);
-    pSizes = vals.first;
-    pRooms = vals.second;
+    // pLinks = findPropertyLinks($);
+    // pImgs = findPropertyImages($);
+    // pPrices = findPriceInfo($);
+    // var vals = findAddressInfos($);
+    // pAddrs = vals.first;
+    // pCodes = vals.second;
+    // vals = findRoomsAndSizeInfo($);
+    // pSizes = vals.first;
+    // pRooms = vals.second;
     
-    var numValuesForListings = [pLinks.length, pImgs.length, pPrices.length, 
-        pAddrs.length, pCodes.length, pSizes.length, pRooms.length];
+    // var numValuesForListings = [pLinks.length, pImgs.length, pPrices.length, 
+    //     pAddrs.length, pCodes.length, pSizes.length, pRooms.length];
     
-    if (numValuesForListings.every(v => {return v === numValuesForListings[0]; })){
-        var numListings = pLinks.length;
-        for(var i = 0; i < numListings; i++){
-            properties.push(new PropertyResultModel(
-                this.price = pPrices[i],
-                this.size = pSizes[i],
-                this.link = pLinks[i],
-                this.image = imageSourcesConstructor(pImgs[i]),
-                this.address = pAddrs[i],
-                this.postcode = pCodes[i],
-                this.rooms = pRooms[i]
-            ));
-        }
-    }
+    // if (numValuesForListings.every(v => {return v === numValuesForListings[0]; })){
+    //     var numListings = pLinks.length;
+    //     for(var i = 0; i < numListings; i++){
+    //         properties.push(new PropertyResultModel(
+    //             this.price = pPrices[i],
+    //             this.size = pSizes[i],
+    //             this.link = pLinks[i],
+    //             this.image = imageSourcesConstructor(pImgs[i]),
+    //             this.address = pAddrs[i],
+    //             this.postcode = pCodes[i],
+    //             this.rooms = pRooms[i]
+    //         ));
+    //     }
+    // }
     return properties;
 }
 
