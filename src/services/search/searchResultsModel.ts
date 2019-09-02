@@ -1,4 +1,3 @@
-
 export class PropertyResultModel {
     public price: string;
     public size: string;
@@ -8,14 +7,21 @@ export class PropertyResultModel {
     public postcode: string;
     public rooms: string;
 
-    constructor(price : string, size: string, link: string, 
-        images: string[], address: string, postcode: string, rooms: string){
-            this.price = price;
-            this.size = size;
-            this.link = link;
-            this.images = images;
-            this.address = address;
-            this.postcode = postcode;
-            this.rooms = rooms;
+    constructor(
+        price: string,
+        size: string,
+        link: string,
+        images: string[],
+        address: string,
+        postcode: string,
+        rooms: string,
+    ) {
+        this.price = price;
+        this.size = size;
+        this.link = link;
+        this.images = images;
+        this.address = address;
+        this.postcode = postcode;
+        this.rooms = rooms;
     }
 }

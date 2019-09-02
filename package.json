@@ -4,7 +4,8 @@
   "main": "dist/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "tsc && node ."
+    "start": "tsc && node .",
+    "lint": "tsc --noEmit && eslint 'src/**/*.{js,ts,tsx}' --quiet --fix"    
   },
   "keywords": [],
   "author": "",
@@ -14,11 +15,17 @@
     "@types/cors": "^2.8.6",
     "@types/dotenv": "^6.1.1",
     "@types/puppeteer": "^1.19.1",
+    "@typescript-eslint/eslint-plugin": "^2.0.0",
+    "@typescript-eslint/parser": "^2.0.0",
     "axios": "^0.19.0",
     "cheerio": "^1.0.0-rc.3",
     "dotenv": "^8.1.0",
+    "eslint": "^6.3.0",
+    "eslint-config-prettier": "^6.1.0",
+    "eslint-plugin-prettier": "^3.1.0",
     "express": "^4.17.1",
     "npm": "^6.11.2",
+    "prettier": "^1.18.2",
     "puppeteer": "^1.19.0",
     "tor-request": "^3.1.0"
   },

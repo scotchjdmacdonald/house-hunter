@@ -7,38 +7,33 @@ import cheerio from 'cheerio';
 import puppeteer from 'puppeteer';
 
 const scraperService = async (params: SearchParams) => {
-
-    var fundaResults = await scrapeFunda(params);
-    var parResults = await scrapePararius(params);
+    const fundaResults = await scrapeFunda(params);
+    const parResults = await scrapePararius(params);
 
     return parResults.concat(fundaResults);
-}
-
+};
 
 const scrapeFunda = async (params: SearchParams) => {
-
-    var fundaUrl = constructFundaUrl(params);
+    const fundaUrl = constructFundaUrl(params);
     const $ = await scrapeWithSN(fundaUrl);
     const fundaProperties = crawlFunda($);
-    
+
     return fundaProperties;
-}
+};
 
 const scrapePararius = async (params: SearchParams) => {
- 
-    var parUrl = constructParariusUrl(params);
-    var result = await axios.get(parUrl);
+    const parUrl = constructParariusUrl(params);
+    const result = await axios.get(parUrl);
     const parariusProperties = crawlPararius(cheerio.load(result.data));
-    
+
     return parariusProperties;
-}
+};
 
 const scrapeWithSN = async (url: string) => {
-
-    var snUrl = constructSNUrl(url); 
-    var result = await axios.get(snUrl);
+    const snUrl = constructSNUrl(url);
+    const result = await axios.get(snUrl);
     return cheerio.load(result.data);
-}
+};
 /**
 const scrapeWithPuppeteer = async (url: string) => {
 
@@ -61,6 +56,5 @@ const scrapeWithPuppeteer = async (url: string) => {
 
     return cheerio.load(result);
 }*/
-
 
 export default scraperService;
