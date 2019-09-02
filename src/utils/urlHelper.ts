@@ -21,9 +21,10 @@ export const constructFundaUrl = (p: SearchParams) => {
     return fundaUrl;
 }
 
-export const constructScrapingNinjaUrl = (url: string) => {
-    const key = process.env.SCRAPING_NINJA_API_KEY;
-    return `http://app.scrapingninja.co/api/v1/?api_key=${key}&url=${url}&render_js=False`
+export const constructSNUrl = (url: string) => {
+    const key = process.env.SN_API_KEY;
+    const baseUrl = process.env.SN_BASE_URL;
+    return `${baseUrl}api_key=${key}&url=${url}&render_js=False`
 }
     
 /* eg: https://www.pararius.com/apartments/amsterdam/area-jordaan/900-2000/25m2/1-bedrooms/unfurnished
