@@ -72,7 +72,6 @@ const findRoomsAndSizeInfo = ($: any) => {
         for (let i = 0; i < sizeResults.length; i++) {
             sizes.push($(sizeResults[i]).text());
             rooms.push($(roomResults[i]).text());
-            console.log(`${sizes[i]} ${rooms[i]}`);
         }
     }
 
@@ -85,7 +84,7 @@ const findPriceInfo = ($: any) => {
 
     priceResults.each((i: any, p: any) => {
         prices.push($(p).text());
-        console.log($(p).text());
+        ($(p).text());
     });
     return prices;
 };
@@ -98,11 +97,10 @@ const findAddressInfos = ($: any) => {
 
     addrResults.each((i: any, a: any) => {
         addrs.push($(a).text());
-        console.log($(a).text());
+        ($(a).text());
     });
     codeResults.each((i: any, c: any) => {
         codes.push($(c).text());
-        console.log($(c).text());
     });
 
     return { first: addrs, second: codes };
@@ -113,7 +111,6 @@ const findPropertyLinks = ($: any) => {
     const results = $('.search-content .search-results .search-result-header a:first-child');
     results.each((i: any, l: any) => {
         links.push(`${process.env.FUNDA_BASE_URL}${$(l).attr('href')}`);
-        console.log($(l).attr('href'));
     });
     return links;
 };
@@ -123,7 +120,6 @@ const findPropertyImages = ($: any) => {
     const results = $('.search-result-media .search-result-image img');
     results.each((i: any, img: any) => {
         imgs.push($(img).attr('src'));
-        console.log($(img).attr('src'));
     });
     return imgs;
 };
@@ -132,10 +128,6 @@ const imageSourcesConstructor = (imgLink: string) => {
     const splitSrc = imgLink.split('_');
     const imageRes = `_${splitSrc[splitSrc.length - 1]}`;
     const imgNum = Number(splitSrc[1].split('/').slice(-1)[0]);
-
-    console.log(imgNum);
-    console.log(imageRes);
-
     const imageSources: string[] = [];
 
     imageSources.push(imgLink);

@@ -16,7 +16,7 @@ const scraperService = async (params: SearchParams) => {
 const scrapeFunda = async (params: SearchParams) => {
     const fundaUrl = constructFundaUrl(params);
     const $ = await scrapeWithSN(fundaUrl);
-    const fundaProperties = crawlFunda($);
+    const fundaProperties =  await crawlFunda($);
 
     return fundaProperties;
 };
