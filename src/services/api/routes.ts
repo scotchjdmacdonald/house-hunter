@@ -25,6 +25,7 @@ export default [
                     query.suburbs,
                 );
                 const result = await searchAndScrape(params);
+                res.setHeader('Content-Type', 'application/json');
                 res.status(200).send(JSON.stringify(result));
             },
         ],

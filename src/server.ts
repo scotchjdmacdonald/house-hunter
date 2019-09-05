@@ -20,6 +20,6 @@ applyMiddleware(middleware, router);
 applyRoutes(routes, router);
 
 const server = http.createServer(router);
-const { port = 8080 } = process.env;
+const { port = 4000 } = process.env;
 
 server.listen(port, () => console.log(`Server is running at http:localhost:${port}`));

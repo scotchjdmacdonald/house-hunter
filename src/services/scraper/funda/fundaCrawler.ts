@@ -83,8 +83,9 @@ const findPriceInfo = ($: any) => {
     const priceResults = $('.search-result-info .search-result-price');
 
     priceResults.each((i: any, p: any) => {
-        prices.push($(p).text());
-        ($(p).text());
+        var price = $(p).text();
+        if(price.includes("p/mo"))
+            prices.push($(p).text());
     });
     return prices;
 };
@@ -110,7 +111,9 @@ const findPropertyLinks = ($: any) => {
     const links: string[] = [];
     const results = $('.search-content .search-results .search-result-header a:first-child');
     results.each((i: any, l: any) => {
-        links.push(`${process.env.FUNDA_BASE_URL}${$(l).attr('href')}`);
+        var link = $(l).attr('href');
+        if(link.includes('.html') == false)
+            links.push(`${process.env.FUNDA_BASE_URL}${link}`);
     });
     return links;
 };
