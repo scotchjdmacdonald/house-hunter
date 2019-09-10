@@ -1,7 +1,7 @@
 import cheerio from 'cheerio';
 import dotenv from 'dotenv';
 import { PropertyResultModel } from '../../search/searchResultsModel';
-import { ADDRCONFIG } from 'dns';
+import { logger } from '../../../config/logger';
 
 dotenv.config();
 
@@ -57,6 +57,10 @@ export const crawlFunda = ($: any) => {
                 ),
             );
         }
+    } else {
+        logger.info(`Inconsistent property details array length, 
+        priceL:${pPrices.length}, linksL:${pLinks.length}, sizesL:${pSizes.length}, 
+        addrL:${pAddrs.length}, codesL:${pCodes.length}, roomL:${pRooms.length}`);
     }
     return properties;
 };
@@ -83,9 +87,8 @@ const findPriceInfo = ($: any) => {
     const priceResults = $('.search-result-info .search-result-price');
 
     priceResults.each((i: any, p: any) => {
-        var price = $(p).text();
-        if(price.includes("p/mo"))
-            prices.push($(p).text());
+        const price = $(p).text();
+        if (price.includes('p/mo')) prices.push($(p).text());
     });
     return prices;
 };
@@ -98,7 +101,7 @@ const findAddressInfos = ($: any) => {
 
     addrResults.each((i: any, a: any) => {
         addrs.push($(a).text());
-        ($(a).text());
+        $(a).text();
     });
     codeResults.each((i: any, c: any) => {
         codes.push($(c).text());
@@ -111,9 +114,8 @@ const findPropertyLinks = ($: any) => {
     const links: string[] = [];
     const results = $('.search-content .search-results .search-result-header a:first-child');
     results.each((i: any, l: any) => {
-        var link = $(l).attr('href');
-        if(link.includes('.html') == false)
-            links.push(`${process.env.FUNDA_BASE_URL}${link}`);
+        const link = $(l).attr('href');
+        if (link.includes('.html') == false) links.push(`${process.env.FUNDA_BASE_URL}${link}`);
     });
     return links;
 };
