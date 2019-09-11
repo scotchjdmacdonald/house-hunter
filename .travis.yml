@@ -3,7 +3,6 @@ node_js:
   - 9.4.0
 
 script:
- - npm i
  - zip -r HouseHunterBE.zip dist .env package.json package-lock.json .npmrc
 
 deploy:
@@ -16,3 +15,4 @@ deploy:
   app: "HouseHunterBE"
   env: "Househunterbe-env"
   bucket_name: "househunterbe"
+  zip_file: "HouseHunterBE.zip"
