@@ -6,6 +6,8 @@ script:
  - zip -r HouseHunterBE.zip dist .env package.json package-lock.json .npmrc
 
 deploy:
+  verbose: true
+  skip_cleanup: true
   provider: elasticbeanstalk
   access_key_id:
     secure: $AWS_ACCESS_KEY
@@ -16,5 +18,3 @@ deploy:
   env: "Househunterbe-env"
   bucket_name: "househunterbe"
   zip_file: "HouseHunterBE.zip"
-  verbose: true
-  skip_clean: true
