@@ -6,7 +6,7 @@
     "postinstall": "npx tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "tsc && node .",
-    "start": "npx pm2 start pm2.yaml",
+    "start": "node .",
     "lint": "tsc --noEmit && eslint 'src/**/*.{js,ts,tsx}' --quiet --fix"
   },
   "keywords": [],
