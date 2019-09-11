@@ -6,7 +6,7 @@ cache:
   npm: false
 
 script:
- - zip -r HouseHunterBE.zip dist .env package.json package-lock.json .npmrc
+ - zip -r HouseHunterBE.zip dist .env package.json package-lock.json
 
 deploy:
   verbose: true
