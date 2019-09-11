@@ -16,3 +16,5 @@ deploy:
   env: "Househunterbe-env"
   bucket_name: "househunterbe"
   zip_file: "HouseHunterBE.zip"
+  verbose: true
+  skip_clean: true
