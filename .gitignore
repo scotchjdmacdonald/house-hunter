@@ -9,9 +9,6 @@ lerna-debug.log*
 # vscode launch
 .vscode/
 
-#package-lock
-package-lock.json
-
 # Runtime data
 pids
 *.pid
