@@ -1,0 +1,16 @@
+language: node_js 
+
+script:
+ - npm i
+ - zip -r HouseHunterBE.zip dist .env package.json package-lock.json .npmrc
+
+deploy:
+  provider: elasticbeanstalk
+  access_key_id:
+    secure: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: $AWS_SECRET_KEY
+  region: "us-east-1"
+  app: "HouseHunterBE"
+  env: "house-hunter"
+  bucket_name: "househunterbe"
