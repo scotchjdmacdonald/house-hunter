@@ -5,8 +5,7 @@
 ### Got a bit sick of having to look on different websites all the time 😉.
 
 
-NodeJs with [Typescript](https://www.typescriptlang.org/) backend, used by this [Vue-Cli
-(https://github.com/scotchjdmacdonald/house-hunter-fe) front end.
+NodeJs with [Typescript](https://www.typescriptlang.org/) backend, used by this [Vue-Cli](https://github.com/scotchjdmacdonald/house-hunter-fe) front end.
 
 Built and deployed to AWS's [ElasticBeanstalk](https://aws.amazon.com/elasticbeanstalk/) using [Travis CI](travis-ci.org) (check out the .travis.yml).
 
