@@ -16,6 +16,7 @@ export const constructFundaUrl = (p: SearchParams) => {
     fundaUrl += 'appartement/';
     if (p.minSize) fundaUrl += `${p.minSize}+woonopp/`;
     if (p.bedrooms) fundaUrl += `${p.bedrooms}+kamers/`;
+    if (p.page) fundaUrl += `p${p.page}/`;
 
     return fundaUrl;
 };
@@ -40,6 +41,7 @@ export const constructParariusUrl = (p: SearchParams) => {
     if (p.minSize) parUrl += `${p.minSize}m2/`;
     if (p.bedrooms) parUrl += `${p.bedrooms}-bedrooms/`;
     if (p.furnished != null) p.furnished == 'true' ? (parUrl += 'furnished/') : (parUrl += 'unfurnished/');
+    if (p.page) parUrl += `page-${p.page}/`;
 
     return parUrl;
 };

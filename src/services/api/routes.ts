@@ -23,6 +23,7 @@ export default [
                     query.keywords,
                     query.furnished,
                     query.suburbs,
+                    query.page,
                 );
                 const result = await searchAndScrape(params);
                 res.setHeader('Content-Type', 'application/json');

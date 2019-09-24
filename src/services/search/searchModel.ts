@@ -6,6 +6,7 @@ export class SearchParams {
     public keywords: string[];
     public furnished: string;
     public suburb: string;
+    public page: string;
 
     constructor(
         minSize: string,
@@ -15,6 +16,7 @@ export class SearchParams {
         keywords: string[],
         furnished: string,
         suburb: string,
+        page: string,
     ) {
         this.minSize = minSize;
         this.maxPrice = maxPrice;
@@ -23,5 +25,6 @@ export class SearchParams {
         this.keywords = keywords;
         this.furnished = furnished;
         this.suburb = suburb;
+        this.page = page;
     }
 }
