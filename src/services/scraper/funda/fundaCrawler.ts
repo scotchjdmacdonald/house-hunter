@@ -16,8 +16,6 @@ export const crawlFunda = ($: any) => {
     let pRooms: string[] = [];
     let pSizes: string[] = [];
 
-    const numResults: number = findNumberOfResults($);
-
     pLinks = findPropertyLinks($);
     pImgs = findPropertyImages($);
     pPrices = findPriceInfo($);
@@ -143,10 +141,11 @@ const imageSourcesConstructor = (imgLink: string) => {
     return imageSources;
 };
 
-const findNumberOfResults = ($: any) => {
+export const findNumberOfResultsFunda = ($: any) => {
     return Number(
         $('.search-output-result-count span')
             .text()
-            .split(' ')[0],
+            .split(' ')[0]
+            .replace(',', ''),
     );
 };

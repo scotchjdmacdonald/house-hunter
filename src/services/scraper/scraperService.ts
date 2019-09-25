@@ -1,24 +1,34 @@
 import { SearchParams } from '../search/searchModel';
 import { constructFundaUrl, constructParariusUrl, constructSNUrl } from '../../utils/urlHelper';
-import { crawlFunda } from './funda/fundaCrawler';
-import { crawlPararius } from './pararius/parariusCrawler';
+import { crawlFunda, findNumberOfResultsFunda } from './funda/fundaCrawler';
+import { crawlPararius, findNumberOfResultsPar } from './pararius/parariusCrawler';
 import axios from 'axios';
 import cheerio from 'cheerio';
 import { logger } from '../../config/logger';
 
 const scraperService = async (params: SearchParams) => {
     const fundaResults = await scrapeFunda(params);
-    const parResults = await scrapePararius(params);
+    var fundaProperties = fundaResults.first;
+    var totalFundaResults = fundaResults.second;
 
-    return parResults.concat(fundaResults);
+    const parResults = await scrapePararius(params);
+    var parariusProperties = parResults.first;
+    var totalParResults = parResults.second;
+
+    var properties = parariusProperties.concat(fundaProperties);
+    var totalResults = ( totalFundaResults ? totalFundaResults : 0 )
+    + ( totalParResults ? totalParResults : 0 );
+
+    return {properties, totalResults};
 };
 
 const scrapeFunda = async (params: SearchParams) => {
     const fundaUrl = constructFundaUrl(params);
     const $ = await scrapeWithSN(fundaUrl);
     const fundaProperties = await crawlFunda($);
+    const numResults: number = findNumberOfResultsFunda($);    
 
-    return fundaProperties;
+    return { first: fundaProperties, second: numResults };
 };
 
 const scrapePararius = async (params: SearchParams) => {
@@ -27,8 +37,11 @@ const scrapePararius = async (params: SearchParams) => {
         const result = await axios.get(parUrl);
 
         if (result.status === 200) {
-            const parariusProperties = crawlPararius(cheerio.load(result.data));
-            return parariusProperties;
+            const $ = cheerio.load(result.data)
+            const parariusProperties = crawlPararius($);
+            const numResults: number = findNumberOfResultsPar($);
+
+            return { first: parariusProperties, second: numResults };
         } else {
             throw `${result.status} problem scraping pararius`;
         }

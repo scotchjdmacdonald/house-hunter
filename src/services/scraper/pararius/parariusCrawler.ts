@@ -9,8 +9,6 @@ dotenv.config();
 export const crawlPararius = ($: any) => {
     const properties: PropertyResultModel[] = [];
 
-    const numResults: number = findNumberOfResults($);
-
     const listingNodes = $('.property-list-item-container');
     const numListingsOnPage = listingNodes.length;
 
@@ -69,11 +67,12 @@ export const crawlPararius = ($: any) => {
     return properties;
 };
 
-const findNumberOfResults = ($: any) => {
+export const findNumberOfResultsPar = ($: any) => {
     return Number(
         $('.search-results-wrapper .header .count')
             .text()
             .trim()
-            .split(' ')[0],
+            .split(' ')[0]
+            .replace(',',''),
     );
 };
