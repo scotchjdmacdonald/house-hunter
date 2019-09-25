@@ -8,25 +8,24 @@ import { logger } from '../../config/logger';
 
 const scraperService = async (params: SearchParams) => {
     const fundaResults = await scrapeFunda(params);
-    var fundaProperties = fundaResults.first;
-    var totalFundaResults = fundaResults.second;
+    const fundaProperties = fundaResults.first;
+    const totalFundaResults = fundaResults.second;
 
     const parResults = await scrapePararius(params);
-    var parariusProperties = parResults.first;
-    var totalParResults = parResults.second;
+    const parariusProperties = parResults.first;
+    const totalParResults = parResults.second;
 
-    var properties = parariusProperties.concat(fundaProperties);
-    var totalResults = ( totalFundaResults ? totalFundaResults : 0 )
-    + ( totalParResults ? totalParResults : 0 );
+    const properties = parariusProperties.concat(fundaProperties);
+    const totalResults = (totalFundaResults ? totalFundaResults : 0) + (totalParResults ? totalParResults : 0);
 
-    return {properties, totalResults};
+    return { properties, totalResults };
 };
 
 const scrapeFunda = async (params: SearchParams) => {
     const fundaUrl = constructFundaUrl(params);
     const $ = await scrapeWithSN(fundaUrl);
     const fundaProperties = await crawlFunda($);
-    const numResults: number = findNumberOfResultsFunda($);    
+    const numResults: number = findNumberOfResultsFunda($);
 
     return { first: fundaProperties, second: numResults };
 };
@@ -37,7 +36,7 @@ const scrapePararius = async (params: SearchParams) => {
         const result = await axios.get(parUrl);
 
         if (result.status === 200) {
-            const $ = cheerio.load(result.data)
+            const $ = cheerio.load(result.data);
             const parariusProperties = crawlPararius($);
             const numResults: number = findNumberOfResultsPar($);
 

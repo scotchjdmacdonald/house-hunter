@@ -18,7 +18,7 @@ export const crawlPararius = ($: any) => {
         const imgNodes = $(currNode).find('.centered-image-container img');
         const pImgs: string[] = [];
         imgNodes.each((c: any, n: any) => {
-            var tmpImg = ($(n).attr('src') || $(n).attr('data-src')).replace('180x300', '613x920');
+            const tmpImg = ($(n).attr('src') || $(n).attr('data-src')).replace('180x300', '613x920');
             pImgs.push(tmpImg);
         });
 
@@ -73,6 +73,6 @@ export const findNumberOfResultsPar = ($: any) => {
             .text()
             .trim()
             .split(' ')[0]
-            .replace(',',''),
+            .replace(',', ''),
     );
 };
